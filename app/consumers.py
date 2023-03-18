@@ -31,3 +31,9 @@ class ChatConsumer(WebsocketConsumer):
         '''
         print('断开连接')
         raise StopConsumer()
+
+    def send_message(self,message):
+        self.send(message)
+        print('已经发送消息' + message)
+
+
