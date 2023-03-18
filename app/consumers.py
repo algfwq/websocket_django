@@ -1,7 +1,6 @@
 from channels.exceptions import StopConsumer
 from channels.generic.websocket import WebsocketConsumer
 
-
 class ChatConsumer(WebsocketConsumer):
     def websocket_connect(self, message):
         '''
@@ -11,6 +10,7 @@ class ChatConsumer(WebsocketConsumer):
         '''
         # 服务器允许客户端创建连接
         self.accept()
+        self.send("服务器已经验证！Websocket连接成功！")
 
     def websocket_receive(self, message):
         '''
