@@ -19,5 +19,10 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("main/",views.main),
+    path("",views.main),
+    # path('time/',views.current_datetime),
+    # path('old/',views.old)
+    path('index/',views.index),
+    path("as/",views.async_view),
+    path('sy/',views.sync_view),
 ]
