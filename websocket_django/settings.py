@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,8 +29,23 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 #celery配置内容
-CELERY_BROKER_URL ='redis://localhost:6379'
-CELERY_RESULT_BACKEND ='redis://localhost:6379'
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://:@127.0.0.1:6379/0')
+# 存储结果后端
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379/7')
+
+# 时区
+CELERY_TIMEZONE = 'Asia/Shanghai'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+# redis  相关配置信息
+REDIS_HOST = "127.0.0.1"
+REDIS_PORT = 6379  # 端口
+REDIS_PASSWORD = ""
+REDIS_SSL_STATUS = False  # 是否需要SSL
+REDIS_BASE_URL = "redis://127.0.0.1:6379/"  # 基础连接-用于连接池
+
 
 #channels通道配置
 # CHANNEL_LAYERS = {
