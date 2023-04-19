@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#celery配置内容
+CELERY_BROKER_URL ='redis://localhost:6379'
+CELERY_RESULT_BACKEND ='redis://localhost:6379'
+
 #channels通道配置
 # CHANNEL_LAYERS = {
 #     "default": {

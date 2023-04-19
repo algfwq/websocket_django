@@ -2,6 +2,7 @@ from channels.exceptions import StopConsumer
 from channels.generic.websocket import WebsocketConsumer
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from.tasks import send_message
 
 class ChatConsumer(WebsocketConsumer):
     def websocket_connect(self, message):
@@ -56,6 +57,11 @@ class ChatConsumer(WebsocketConsumer):
 
         elif message['text'] == 'yibu':
             self.send("任务正在执行")
+
+            send_message.delay('奥利给！')  # 添加异步任务
+            # send_message('奥利给！')  # 同步任务
+
+            self.send("任务完成！")
 
         else:
             # 服务端向前端回消息
